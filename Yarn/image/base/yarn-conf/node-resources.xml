@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<configuration>
+	<property>
+		<name>yarn.nodemanager.resource-type.resource1</name>
+		<value>16G</value>
+	</property>
+</configuration>

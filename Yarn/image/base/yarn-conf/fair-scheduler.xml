@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<allocations>
+	<queue name="ABC">
+		<minResources>2000 mb, 2vcores</minResources>
+		<maxResources>8000 mb, 8vcores</maxResources>
+		<weight>2.0</weight>
+		<schedulingPolicy>fair</schedulingPolicy>
+	</queue>
+	<queue name="XYZ">
+		<minResources>3000 mb, 0vcores</minResources>
+		<maxResources>10000 mb, 0vcores</maxResources>
+		<weight>3.0</weight>
+		<schedulingPolicy>fifo</schedulingPolicy>
+		<queue name="technology" />
+		<queue name="development" />
+	</queue>
+	<queueMaxResourcesDefault>16000 mb, 8vcores</queueMaxResourcesDefault>
+
+	<queuePlacementPolicy>
+		<rule name="specified" />
+		<rule name="primaryGroup" create="false" />
+		<rult name="default" queue="ABC"/>
+	</queuePlacementPolicy>
+</allocations>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<configuration>
+	<property>
+		<name>yarn.resource-types</name>
+		<value>resource1</value>
+	</property>
+	<property>
+		<name>yarn.resource-types.resource1.units</name>
+		<value>G</value>
+	</property>
+</configuration>
+
