@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  spark-master:
+    image: master:$SPARK_VERSION
+    build: 
+      context: ./Standalone/image/master
+      args:
+        - SPARK_VERSION=$SPARK_VERSION
+    container_name: master
+    environment:
+      - SPARK_MASTER_HOST=master
+    restart: always
+    ports:
+      - 7077:7077
+      - 8080:8080
+      - 4040:4040
+    
+  spark-worker1:
+    image: worker:$SPARK_VERSION
+    build: 
+      context: ./Standalone/image/worker
+      args:
+        - SPARK_VERSION=$SPARK_VERSION
+    container_name: worker1
+    environment:
+      - SPARK_MASTER_HOST=master
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - spark-master
+
+  spark-worker2:
+    image: worker:$SPARK_VERSION
+    build: 
+      context: ./Standalone/image/worker
+      args:
+        - SPARK_VERSION=$SPARK_VERSION
+    container_name: worker2
+    environment:
+      - SPARK_MASTER_HOST=master
+    restart: always
+    ports:
+      - 8082:8081
+    depends_on:
+      - spark-master
+
+  notebook:
+    image: spark-notebook:$SPARK_VERSION
+    build:
+      context: ./Standalone/image/jupyter
+      args:
+        - SPARK_VERSION=$SPARK_VERSION
+    container_name: jupyter-notebook
+    environment:
+      - SPARK_MASTER_HOST=master
+    restart: always
+    ports:
+      - 8989:8989
+    depends_on:
+      - spark-master
